@@ -50,3 +50,34 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 生日快乐！ 🎂</h1>
+  <p>今天是属于你的特别日子</p>
+  <button class="envelope" onclick="openLetter()">📩 点击打开信件</button>
+
+  <div id="letter">
+    <h2>💌 给你的话</h2>
+    <p>
+      亲爱的朋友：<br><br>
+      很高兴在你的生日这一天，能把最真挚的祝福送给你。<br>
+      谢谢你一路以来的陪伴与支持，愿你在新的一岁里每天都能笑口常开，收获属于你的幸福和精彩！<br><br>
+      🎉 生日快乐！
+    </p>
+  </div>
+
+  <!-- 背景音乐 -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function openLetter() {
+      document.getElementById("letter").style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
