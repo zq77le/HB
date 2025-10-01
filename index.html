@@ -1,13 +1,115 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>测试</title>
-  </head>
-  <body>
-    <h1 style="text-align:center; margin-top:50px;">🎉 成功啦！</h1>
-    <p style="text-align:center;">如果你看到这一行，说明 GitHub Pages 已经正常运行。</p>
-  </body>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>生日快乐！我的好朋友</title>
+  <style>
+    body {
+      text-align: center;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 3em;
+      margin-top: 15%;
+      animation: fadeIn 2s ease-in-out;
+    }
+    p {
+      font-size: 1.5em;
+      margin-top: 10px;
+      animation: fadeIn 3s ease-in-out;
+    }
+    .envelope {
+      margin-top: 40px;
+      font-size: 2em;
+      cursor: pointer;
+      padding: 20px 40px;
+      border: 2px solid white;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s, background 0.3s;
+      animation: fadeIn 4s ease-in-out;
+    }
+    .envelope:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.4);
+    }
+    #letter {
+      display: none;
+      margin: 30px auto;
+      max-width: 500px;
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 15px;
+      line-height: 1.8em;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      animation: float 10s infinite ease-in;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 生日快乐！ 🎂</h1>
+  <p>今天是属于你的特别日子</p>
+  <button class="envelope" onclick="openLetter()">📩 点击打开信件</button>
+
+  <div id="letter">
+    <h2>💌 给你的话</h2>
+    <p>
+      亲爱的朋友：<br><br>
+      很高兴在你的生日这一天，能把最真挚的祝福送给你。<br>
+      谢谢你一路以来的陪伴与支持，愿你在新的一岁里每天都能笑口常开，收获属于你的幸福和精彩！<br><br>
+      🎉 生日快乐！
+    </p>
+  </div>
+
+  <!-- 背景音乐 -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function openLetter() {
+      document.getElementById("letter").style.display = "block";
+    }
+
+    // 生成气球
+    function createBalloon() {
+      const balloon = document.createElement("div");
+      balloon.className = "balloon";
+      balloon.style.left = Math.random() * 100 + "vw";
+      balloon.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
+      balloon.style.animationDuration = 6 + Math.random() * 5 + "s";
+      document.body.appendChild(balloon);
+
+      setTimeout(() => {
+        balloon.remove();
+      }, 10000);
+    }
+    setInterval(createBalloon, 800);
+  </script>
+</body>
 </html>
 
 
