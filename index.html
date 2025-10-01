@@ -1,17 +1,68 @@
-<audio id="bg-music" autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/zq77le/HB/main/HappyBirthday.mp3" type="audio/mpeg">
-</audio>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>生日快乐！</title>
+  <style>
+    body {
+      text-align: center;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 3em;
+      margin-top: 15%;
+    }
+    .envelope {
+      margin-top: 40px;
+      font-size: 1.5em;
+      cursor: pointer;
+      padding: 15px 30px;
+      border: 2px solid white;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s, background 0.3s;
+    }
+    .envelope:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+    }
+    #letter {
+      display: none;
+      margin: 30px auto;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 生日快乐！ 🎉</h1>
+  <p>点一下下面的按钮，有惊喜哦！</p>
 
-<button onclick="unmuteMusic()">🔊 开启音乐</button>
+  <!-- 音乐：默认静音播放 -->
+  <audio id="bg-music" autoplay loop muted>
+    <source src="https://zq77le.github.io/HB/music/HappyBirthday.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
-  function unmuteMusic() {
-    const music = document.getElementById("bg-music");
-    music.muted = false; // 取消静音
-    music.play();
-    alert("✅ 声音已开启！");
-  }
-</script>
+  <!-- 开启音乐 -->
+  <button class="envelope" onclick="unmuteMusic()">🔊 开启音乐</button>
+
+  <!-- 打开信件 -->
+  <button class="envelope" onclick="openLetter()">💌 打开信件</button>
+
+  <div id="letter">
+    <h2>给你的一封信 💖</h2>
+    <p>
+      亲爱的朋友，生日快乐！<br>
+      愿你每天都像今天一样充满喜悦，<br>
+      未来的日子里健康、幸福、顺心。<br>
+      这首歌和这封小小的信，是我送给你的特别礼物 🎁
 
 
 
