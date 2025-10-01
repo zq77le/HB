@@ -1,95 +1,38 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8" />
-  <title>生日快乐！</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    body { text-align:center; background: linear-gradient(to right,#ffdde1,#ee9ca7); font-family: 'Segoe UI',sans-serif; color:#fff; margin:0; padding:0; }
-    h1 { font-size:2.4rem; margin-top:12vh; }
-    p.sub { color: rgba(255,255,255,0.9); margin-top:8px; }
-    .btn { margin:18px 8px; font-size:1rem; padding:10px 18px; border-radius:10px; border:2px solid #fff; background:rgba(255,255,255,0.15); color:#fff; cursor:pointer; }
-    .btn:hover { transform:scale(1.03); background: rgba(255,255,255,0.28); }
-    #letter { display:none; margin:20px auto; max-width:600px; background:#fff; color:#222; padding:18px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.15); line-height:1.6; }
-    #status { margin-top:6px; font-size:0.9rem; color:rgba(255,255,255,0.9); }
-  </style>
-</head>
-<body>
-  <h1>🎂 生日快乐！ 🎉</h1>
-  <p class="sub">点下面按钮开启音乐并查看我写给你的信～</p>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('musicBtn');
+    const letterBtn = document.getElementById('letterBtn');
+    const letter = document.getElementById('letter');
+    const status = document.getElementById('status');
 
-  <!-- 音乐（Page URL —— 推荐） -->
-  <audio id="bg-music" autoplay loop muted preload="auto">
-    <source src="https://zq77le.github.io/HB/music/HappyBirthday.mp3" type="audio/mpeg">
-    您的浏览器不支持 audio。
-  </audio>
+    let isPlaying = false; // 追踪音乐状态
 
-  <div>
-    <button id="musicBtn" class="btn">🔊 开启音乐</button>
-    <button id="letterBtn" class="btn" style="display:none">📩 打开信件</button>
-  </div>
-
-  <div id="status" aria-live="polite"></div>
-
-  <div id="letter">
-    <h2>给你的一封信 💖</h2>
-    <p>亲爱的朋友，生日快乐！感谢你一直以来的陪伴与支持，愿你的每一天都充满快乐与惊喜！🎉</p>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const music = document.getElementById('bg-music');
-      const musicBtn = document.getElementById('musicBtn');
-      const letterBtn = document.getElementById('letterBtn');
-      const letter = document.getElementById('letter');
-      const status = document.getElementById('status');
-
-      // 显示当前音频源，便于调试
-      status.textContent = '音频源: ' + (music.currentSrc || music.src);
-
-      // 监听加载成功 / 失败
-      music.addEventListener('canplaythrough', () => {
-        console.log('audio canplaythrough');
-        status.textContent = '音乐已就绪，点击「开启音乐」播放。';
-      });
-      music.addEventListener('error', (e) => {
-        console.error('audio error', e);
-        status.textContent = '⚠️ 音频加载失败，请确认路径可访问（最好使用 https://zq77le.github.io/HB/music/HappyBirthday.mp3）';
-      });
-
-      // 点击按钮逻辑（使用 eventListener，避免 onclick 全局函数依赖）
-      musicBtn.addEventListener('click', async () => {
-        try {
-          if (music.paused) {
-            music.muted = false; // 取消静音
-            await music.play();
-            musicBtn.textContent = '⏸ 暂停音乐';
-            letterBtn.style.display = 'inline-block';
-            status.textContent = '正在播放音乐 🎵';
-          } else {
-            music.pause();
-            musicBtn.textContent = '🔊 开启音乐';
-            status.textContent = '音乐已暂停';
-          }
-        } catch (err) {
-          console.error('play() failed:', err);
-          status.textContent = '播放失败：' + (err && err.name ? err.name : err);
-          alert('播放失败：' + (err && err.message ? err.message : err));
+    musicBtn.addEventListener('click', async () => {
+      try {
+        if (!isPlaying) {
+          music.muted = false;
+          await music.play(); // 只调用一次 play
+          isPlaying = true;
+          musicBtn.textContent = '⏸ 暂停音乐';
+          letterBtn.style.display = 'inline-block';
+          status.textContent = '正在播放音乐 🎵';
+        } else {
+          music.pause();
+          isPlaying = false;
+          musicBtn.textContent = '🔊 开启音乐';
+          status.textContent = '音乐已暂停';
         }
-      });
-
-      letterBtn.addEventListener('click', () => {
-        letter.style.display = 'block';
-        letterBtn.style.display = 'none';
-      });
-
-      // 对外暴露一个调试方法（可在 console 调用 testAudio()）
-      window.testAudio = function () {
-        console.log('audio src=', music.currentSrc, 'paused=', music.paused, 'muted=', music.muted);
-        alert('audio src='+music.currentSrc+'\npaused='+music.paused+'\nmuted='+music.muted);
-      };
+      } catch (err) {
+        console.error('播放失败:', err);
+        status.textContent = '播放失败：' + err.name;
+      }
     });
-  </script>
-</body>
-</html>
+
+    letterBtn.addEventListener('click', () => {
+      letter.style.display = 'block';
+      letterBtn.style.display = 'none';
+    });
+  });
+</script>
 
