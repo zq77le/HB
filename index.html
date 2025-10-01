@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>祝赛赛生日快乐！🎉</title>
+<title>赛赛生日快乐！🎉</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <style>
   body {
@@ -11,23 +11,29 @@
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #ffdde1, #ee9ca7);
+    background: linear-gradient(to right, #0d0d3f, #4b0082); /* 深蓝紫色渐变 */
     overflow: hidden;
     color: white;
   }
+
   h1 {
     font-size: 3em;
     margin-top: 5%;
   }
+
   #letter {
-    display: none;
     margin: 30px auto;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 20px;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
     border-radius: 15px;
     font-size: 1.2em;
+    text-align: left;
+    white-space: pre-line;
+    display: none;
+    overflow: hidden;
   }
+
   #playBtn {
     margin-top: 20px;
     font-size: 1.2em;
@@ -38,61 +44,62 @@
     color: white;
     cursor: pointer;
   }
+
   #playBtn:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.1);
     transition: all 0.3s;
   }
 
-  /* 星星样式 */
+  /* 星点背景 */
   .star {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 2px;
+    height: 2px;
     background-color: white;
     border-radius: 50%;
     opacity: 0.8;
-    animation: floatStars linear infinite, twinkle 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes floatStars {
-    0% { transform: translateY(100vh); }
-    100% { transform: translateY(-10vh); }
+    animation: twinkle 3s infinite alternate;
   }
 
   @keyframes twinkle {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
+    0% {opacity: 0.2;}
+    50% {opacity: 1;}
+    100% {opacity: 0.2;}
   }
 </style>
 </head>
 <body>
 
 <h1>🎂 生日快乐！ 🎉</h1>
-<p>点击下面按钮播放音乐并查看信封💌🎶</p>
+<p>点击下面按钮播放音乐并查看祝福信💌🎶</p>
 
-<!-- 播放按钮 -->
 <button id="playBtn">🔊 播放音乐</button>
-
-<!-- APlayer 播放器 -->
 <div id="aplayer"></div>
 
-<!-- 信件 -->
-<div id="letter">
-  <h2>给你的一封信礼物 💖</h2>
-  <p>
-    赛赛，生日快乐！🎉🎂<br>
-    <!-- 省略正文，可保留原文 -->
-  </p>
-</div>
+<div id="letter"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script>
 const playBtn = document.getElementById('playBtn');
 const letter = document.getElementById('letter');
 
-// 初始化音乐播放器
+const message = `赛赛，生日快乐！🎉🎂
+我们是在《光遇》里认识的，然后开始我们越来越了解对方，从那一刻起，你就成了我生命里特别的存在。你总是为别人着想，善良、温柔，会唱歌、画画，写字 还亲手做手链、项链送给我，每一次都让我感动又开心。 对我来说，你就像在远方的家人一样重要，就像妹妹一样亲近。  
+
+每次和你打电话、聊天、打游戏、唱歌 我都觉得很安心、很开心，好像所有烦恼都离我远去了。 我知道你有时候也会心情不好，有烦恼却不想立刻说出来，但我想让你知道无论你开心还是不开心，我都会在你身边陪你，不只是今天，而是每一天。只要你需要，我就一直在。你永远是我最好的好朋友、第一名💛  
+
+今年的生日礼物你老是说贵！这就是一年一次你的生日我还是希望你收到礼物后会喜欢。当然如果不满意，我们还可以再买别的哈哈哈哈  
+
+明年我更期待和你见面，一起拍好多好多照片，去好玩的地方，吃好吃的，留下美好的回忆和照片视频。  
+
+希望你也能多为自己着想，把自己照顾得好好的，因为你值得最好的。 无论别人怎么否定你，在我心里，你永远都是最棒的！你在我心里永远是最特别的朋友，像家人一样，我会一直珍惜我们的友情。  
+
+最后，祝就像我家人、妹妹一样的赛赛——生日快乐！愿你每天都像今天一样被温柔包围，幸福满满💫
+
+—— 你的好朋友`;
+
+// 初始化 APlayer
 const ap = new APlayer({
   element: document.getElementById('aplayer'),
   showlrc: false,
@@ -109,13 +116,15 @@ const ap = new APlayer({
 });
 
 let isPlaying = false;
+
 playBtn.addEventListener('click', () => {
   if(!isPlaying){
     ap.play();
     isPlaying = true;
     playBtn.textContent = "⏸ 暂停音乐";
     letter.style.display = "block";
-    createStars(50); // 创建50颗小星星
+    typeWriter(letter, message, 0);
+    createStars(100);
   } else {
     ap.pause();
     isPlaying = false;
@@ -123,19 +132,30 @@ playBtn.addEventListener('click', () => {
   }
 });
 
-// 创建漂浮闪烁的星星
+// 逐字显示文字函数
+function typeWriter(element, text, index){
+  if(index < text.length){
+    element.innerHTML += text.charAt(index);
+    setTimeout(()=> typeWriter(element, text, index+1), 20); // 每20ms显示一个字
+  }
+}
+
+// 创建星星函数
 function createStars(number){
   for(let i=0;i<number;i++){
     let star = document.createElement('div');
     star.classList.add('star');
     star.style.left = Math.random() * window.innerWidth + 'px';
-    star.style.width = (2 + Math.random()*3) + 'px';
+    star.style.top = Math.random() * window.innerHeight + 'px';
+    star.style.width = (1 + Math.random()*2) + 'px';
     star.style.height = star.style.width;
-    star.style.animationDuration = (5 + Math.random()*10) + 's';
+    star.style.animationDuration = (1 + Math.random()*3) + 's';
     document.body.appendChild(star);
   }
 }
 </script>
+
 </body>
 </html>
+
 
