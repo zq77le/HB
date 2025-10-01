@@ -274,4 +274,29 @@ function startShootingStars(){
   }, 1500);
 }
 
-// 彩色小
+// 彩色小火花动画
+function startCakeSparks(){
+  setInterval(() => {
+    let spark = document.createElement('div');
+    spark.classList.add('spark');
+    spark.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
+    spark.style.left = (cake.offsetLeft + 70 + Math.random()*20 - 10) + 'px';
+    spark.style.top = (cake.offsetTop - 10) + 'px';
+    document.body.appendChild(spark);
+
+    let dx = (Math.random()*40 - 20);
+    let dy = -(20 + Math.random()*30);
+
+    spark.animate(
+      [
+        { transform: `translate(0,0)`, opacity:1 },
+        { transform: `translate(${dx}px,${dy}px)`, opacity:0 }
+      ],
+      { duration: 1000 + Math.random()*500, easing: 'ease-out' }
+    ).onfinish = () => spark.remove();
+  }, 200);
+}
+</script>
+</body>
+</html>
+
