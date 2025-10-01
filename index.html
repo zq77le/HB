@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>生日快乐！我的好朋友🎉</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>生日快乐！好朋友🎂</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css">
   <style>
     body {
       text-align: center;
@@ -14,7 +16,7 @@
     }
     h1 {
       font-size: 3em;
-      margin-top: 15%;
+      margin-top: 10%;
     }
     #letter {
       display: none;
@@ -25,16 +27,31 @@
       border-radius: 15px;
       font-size: 1.2em;
     }
+    .btn {
+      margin-top: 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+    }
   </style>
 </head>
+
 <body>
   <h1>🎂 生日快乐！ 🎉</h1>
-  <p>天天要你天天开心!</p>
+  <p>祝你每天都像今天一样充满喜悦，健康幸福！</p>
 
-  <!-- 音乐 -->
-  <audio id="bg-music" loop>
-    <source src="https://raw.githubusercontent.com/zq77le/HB/main/music/happybirthdaybigday.mp3" type="audio/mpeg">
-  </audio>
+  <!-- 播放器 -->
+  <div id="aplayer"></div>
+  <button class="btn" id="showLetterBtn">💌 打开信件</button>
 
   <!-- 信件 -->
   <div id="letter">
@@ -47,28 +64,36 @@
     </p>
   </div>
 
+  <!-- JS -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const music = document.getElementById('bg-music');
-      const letter = document.getElementById('letter');
+    // 初始化 APlayer 播放器
+    var ap = new APlayer({
+      element: document.getElementById('aplayer'),
+      fixed: true,
+      mini: false,
+      autoplay: false,
+      showlrc: false,
+      audio: [
+        {
+          name: "Happy Birthday",
+          artist: "From Me",
+          url: "https://raw.githubusercontent.com/zq77le/HB/main/music/happybirthdaybigday.mp3",
+          cover: "https://pic.imgdb.cn/item/66b4d81ed9c307b7e9509a33.jpg"
+        }
+      ]
+    });
 
-      try {
-        // 尝试自动播放音乐
-        await music.play();
-        console.log('音乐播放成功');
-      } catch (err) {
-        console.log('浏览器阻止自动播放，需要用户点击：', err.name);
-        alert('点击屏幕任意位置播放音乐');
-        document.body.addEventListener('click', async () => {
-          await music.play();
-        }, { once: true });
-      }
-
-      // 自动显示信件
+    // 打开信件按钮
+    const showBtn = document.getElementById('showLetterBtn');
+    const letter = document.getElementById('letter');
+    showBtn.addEventListener('click', () => {
       letter.style.display = 'block';
+      showBtn.style.display = 'none';
     });
   </script>
 </body>
 </html>
+
 
 
