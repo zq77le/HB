@@ -8,21 +8,21 @@
   <h2>🎵 音乐测试页面 🎵</h2>
   <button onclick="playMusic()">▶️ 播放音乐</button>
 
-  <audio id="bg-music">
-    <source src="https://raw.githubusercontent.com/zq77le/HB/main/HappyBirthday.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bg-music" src="https://raw.githubusercontent.com/zq77le/HB/main/HappyBirthday.mp3"></audio>
 
   <script>
     function playMusic() {
       const music = document.getElementById("bg-music");
       music.play().then(() => {
-        alert("音乐正在播放 🎶");
+        alert("✅ 音乐开始播放！");
       }).catch(err => {
-        alert("音乐播放失败: " + err);
+        alert("❌ 播放失败: " + err);
       });
     }
   </script>
 </body>
 </html>
+
+
 
 
