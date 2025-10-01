@@ -20,11 +20,11 @@
     }
     button {
       margin-top: 30px;
-      font-size: 1.5em;
+      font-size: 1.2em;
       cursor: pointer;
-      padding: 15px 30px;
+      padding: 12px 25px;
       border: 2px solid white;
-      border-radius: 15px;
+      border-radius: 12px;
       background: rgba(255, 255, 255, 0.2);
       color: white;
       transition: transform 0.3s, background 0.3s;
@@ -53,8 +53,9 @@
 </head>
 <body>
   <h1>🎂 生日快乐！ 🎂</h1>
+
   <!-- 播放音乐按钮 -->
-  <button id="musicBtn" onclick="playMusic()">▶️ 播放音乐</button>
+  <button id="musicBtn" onclick="toggleMusic()">▶️ 播放音乐</button>
   <!-- 打开信件按钮（初始隐藏） -->
   <button id="letterBtn" onclick="openLetter()" style="display:none;">📩 打开信件</button>
 
@@ -71,22 +72,6 @@
 
   <!-- 背景音乐 -->
   <audio id="bg-music" loop>
-    <source src="https://raw.githubusercontent.com/zq77le/HB/main/happy.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    function playMusic() {
-      const music = document.getElementById("bg-music");
-      music.play();
-      document.getElementById("musicBtn").style.display = "none";
-      document.getElementById("letterBtn").style.display = "inline-block";
-    }
-    function openLetter() {
-      document.getElementById("letter").style.display = "block";
-      document.getElementById("letterBtn").style.display = "none";
-    }
-  </script>
-</body>
-</html>
+    <source src="https://raw.githubusercontent.com/zq77le/HB/m
 
 
