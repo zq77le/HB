@@ -1,38 +1,117 @@
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const music = document.getElementById('bg-music');
-    const musicBtn = document.getElementById('musicBtn');
-    const letterBtn = document.getElementById('letterBtn');
-    const letter = document.getElementById('letter');
-    const status = document.getElementById('status');
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>生日快乐！</title>
+  <style>
+    body {
+      text-align: center;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 3em;
+      margin-top: 15%;
+    }
+    .btn {
+      margin-top: 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s, background 0.3s;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: white;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+    }
+    #letter {
+      display: none;
+      margin: 30px auto;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.2em;
+    }
+    #status {
+      margin-top: 15px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 生日快乐！ 🎉</h1>
+  <p>点一下下面的按钮，有惊喜哦！</p>
 
-    let isPlaying = false; // 追踪音乐状态
+  <!-- 音乐 -->
+  <audio id="bg-music" loop muted>
+    <source src="https://raw.githubusercontent.com/zq77le/HB/main/music/HappyBirthday.mp3" type="audio/mpeg">
+  </audio>
 
-    musicBtn.addEventListener('click', async () => {
-      try {
-        if (!isPlaying) {
-          music.muted = false;
-          await music.play(); // 只调用一次 play
-          isPlaying = true;
-          musicBtn.textContent = '⏸ 暂停音乐';
-          letterBtn.style.display = 'inline-block';
-          status.textContent = '正在播放音乐 🎵';
-        } else {
-          music.pause();
-          isPlaying = false;
-          musicBtn.textContent = '🔊 开启音乐';
-          status.textContent = '音乐已暂停';
+  <!-- 按钮 -->
+  <button class="btn" id="musicBtn">🔊 开启音乐</button>
+  <button class="btn" id="letterBtn" style="display:none;">💌 打开信件</button>
+
+  <!-- 提示 -->
+  <p id="status">音乐还没开始 🎶</p>
+
+  <!-- 信件 -->
+  <div id="letter">
+    <h2>给你的一封信 💖</h2>
+    <p>
+      亲爱的朋友，生日快乐！<br>
+      愿你每天都像今天一样充满喜悦，<br>
+      未来的日子里健康、幸福、顺心。<br>
+      这首歌和这封小小的信，是我送给你的特别礼物 🎁
+    </p>
+  </div>
+
+  <!-- JS 放在 body 最后 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const music = document.getElementById('bg-music');
+      const musicBtn = document.getElementById('musicBtn');
+      const letterBtn = document.getElementById('letterBtn');
+      const letter = document.getElementById('letter');
+      const status = document.getElementById('status');
+
+      let isPlaying = false;
+
+      musicBtn.addEventListener('click', async () => {
+        try {
+          if (!isPlaying) {
+            music.muted = false;
+            await music.play();
+            isPlaying = true;
+            musicBtn.textContent = '⏸ 暂停音乐';
+            letterBtn.style.display = 'inline-block';
+            status.textContent = '正在播放音乐 🎵';
+          } else {
+            music.pause();
+            isPlaying = false;
+            musicBtn.textContent = '🔊 开启音乐';
+            status.textContent = '音乐已暂停';
+          }
+        } catch (err) {
+          console.error('播放失败:', err);
+          status.textContent = '播放失败：' + err.name;
         }
-      } catch (err) {
-        console.error('播放失败:', err);
-        status.textContent = '播放失败：' + err.name;
-      }
-    });
+      });
 
-    letterBtn.addEventListener('click', () => {
-      letter.style.display = 'block';
-      letterBtn.style.display = 'none';
+      letterBtn.addEventListener('click', () => {
+        letter.style.display = 'block';
+        letterBtn.style.display = 'none';
+      });
     });
-  });
-</script>
-
+  </script>
+</body>
+</html>
