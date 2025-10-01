@@ -1,8 +1,8 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>生日快乐！</title>
+  <title>生日快乐！🎉</title>
   <style>
     body {
       text-align: center;
@@ -16,23 +16,6 @@
       font-size: 3em;
       margin-top: 15%;
     }
-    .btn {
-      margin-top: 20px;
-      font-size: 1.2em;
-      cursor: pointer;
-      padding: 10px 20px;
-      border: 2px solid white;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s, background 0.3s;
-      margin-left: 10px;
-      margin-right: 10px;
-      color: white;
-    }
-    .btn:hover {
-      transform: scale(1.1);
-      background: rgba(255, 255, 255, 0.3);
-    }
     #letter {
       display: none;
       margin: 30px auto;
@@ -42,27 +25,16 @@
       border-radius: 15px;
       font-size: 1.2em;
     }
-    #status {
-      margin-top: 15px;
-      font-size: 1em;
-    }
   </style>
 </head>
 <body>
   <h1>🎂 生日快乐！ 🎉</h1>
-  <p>点一下下面的按钮，有惊喜哦！</p>
+  <p>祝你每天都充满喜悦，未来健康幸福！</p>
 
-  <!-- 音乐（Raw 链接版本） -->
-  <audio id="bg-music" loop muted>
+  <!-- 音乐 -->
+  <audio id="bg-music" loop>
     <source src="https://raw.githubusercontent.com/zq77le/HB/main/music/happybirthdaybigday.mp3" type="audio/mpeg">
   </audio>
-
-  <!-- 按钮 -->
-  <button class="btn" id="musicBtn">🔊 开启音乐</button>
-  <button class="btn" id="letterBtn" style="display:none;">💌 打开信件</button>
-
-  <!-- 提示 -->
-  <p id="status">音乐还没开始 🎶</p>
 
   <!-- 信件 -->
   <div id="letter">
@@ -75,42 +47,25 @@
     </p>
   </div>
 
-  <!-- JS -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', async () => {
       const music = document.getElementById('bg-music');
-      const musicBtn = document.getElementById('musicBtn');
-      const letterBtn = document.getElementById('letterBtn');
       const letter = document.getElementById('letter');
-      const status = document.getElementById('status');
 
-      let isPlaying = false;
+      try {
+        // 尝试自动播放音乐
+        await music.play();
+        console.log('音乐播放成功');
+      } catch (err) {
+        console.log('浏览器阻止自动播放，需要用户点击：', err.name);
+        alert('点击屏幕任意位置播放音乐');
+        document.body.addEventListener('click', async () => {
+          await music.play();
+        }, { once: true });
+      }
 
-      musicBtn.addEventListener('click', async () => {
-        try {
-          if (!isPlaying) {
-            music.muted = false;
-            await music.play();
-            isPlaying = true;
-            musicBtn.textContent = '⏸ 暂停音乐';
-            letterBtn.style.display = 'inline-block';
-            status.textContent = '正在播放音乐 🎵';
-          } else {
-            music.pause();
-            isPlaying = false;
-            musicBtn.textContent = '🔊 开启音乐';
-            status.textContent = '音乐已暂停';
-          }
-        } catch (err) {
-          console.error('播放失败:', err);
-          status.textContent = '播放失败：' + err.name;
-        }
-      });
-
-      letterBtn.addEventListener('click', () => {
-        letter.style.display = 'block';
-        letterBtn.style.display = 'none';
-      });
+      // 自动显示信件
+      letter.style.display = 'block';
     });
   </script>
 </body>
