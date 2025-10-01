@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>赛赛生日快乐！🎉</title>
+<title>赛赛生日快乐🎉</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <style>
   html, body {
@@ -159,11 +159,10 @@
 <div class="cake" id="cake">
   <div class="cake-base"></div>
   <div class="cake-top"></div>
-  <!-- 4 根蜡烛整齐居中 -->
-  <div class="candle" style="left:20%;"><div class="flame"></div></div>
-  <div class="candle" style="left:40%;"><div class="flame"></div></div>
-  <div class="candle" style="left:60%;"><div class="flame"></div></div>
-  <div class="candle" style="left:80%;"><div class="flame"></div></div>
+  <!-- 3 根蜡烛整齐居中 -->
+  <div class="candle" style="left:25%;"><div class="flame"></div></div>
+  <div class="candle" style="left:50%;"><div class="flame"></div></div>
+  <div class="candle" style="left:75%;"><div class="flame"></div></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
@@ -173,7 +172,8 @@ const letter = document.getElementById('letter');
 const cake = document.getElementById('cake');
 
 const message = `赛赛，生日快乐！🎉🎂
-我们是在《光遇》里认识的，然后开始我们越来越了解对方，从那一刻起，你就成了我生命里特别的存在。你总是为别人着想，善良、温柔，会唱歌、画画，写字 还亲手做手链、项链送给我，每一次都让我感动又开心。 对我来说，你就像在远方的家人一样重要，就像妹妹一样亲近。  
+我们是在《光遇》里认识的，然后开始我们越来越了解对方，从那一刻起，你就成了我生命里特别的存在。
+你总是为别人着想，善良、温柔，会唱歌、画画，写字 还亲手做手链、项链送给我，每一次都让我感动又开心。 对我来说，你就像在远方的家人一样重要，就像妹妹一样亲近。  
 
 每次和你打电话、聊天、打游戏、唱歌 我都觉得很安心、很开心，好像所有烦恼都离我远去了。 我知道你有时候也会心情不好，有烦恼却不想立刻说出来，但我想让你知道无论你开心还是不开心，我都会在你身边陪你，不只是今天，而是每一天。只要你需要，我就一直在。你永远是我最好的好朋友、第一名💛  
 
@@ -195,7 +195,7 @@ const ap = new APlayer({
   audio: [
     {
       name: "Happy Birthday",
-      artist: "From Me",
+      artist: "8bite",
       url: "https://res.cloudinary.com/dt3tc3qjw/video/upload/v1759328043/Happy_Birthday_uwtecg.mp3",
       cover: "https://res.cloudinary.com/dt3tc3qjw/image/upload/v1759328695/ogsv4iCeNBzAlEAaTgAJAFXkEfN4sHAiTAIAiA_tplv-dy-aweme-images_q75_copy_lyfldl.jpg"
     }
@@ -301,4 +301,5 @@ function startCakeSparks(){
 </script>
 </body>
 </html>
+
 
