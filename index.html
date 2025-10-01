@@ -1,108 +1,141 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生日快乐！🎉</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-  <style>
-    body {
-      text-align: center;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      font-size: 3em;
-      margin-top: 10%;
-    }
-    #letter {
-      display: none;
-      margin: 30px auto;
-      max-width: 600px;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 15px;
-      font-size: 1.2em;
-    }
-    #playBtn {
-      margin-top: 20px;
-      font-size: 1.2em;
-      padding: 10px 20px;
-      border-radius: 12px;
-      border: 2px solid white;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      cursor: pointer;
-    }
-    #playBtn:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.1);
-      transition: all 0.3s;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>祝赛赛生日快乐！🎉</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #ffdde1, #ee9ca7);
+    overflow: hidden;
+    color: white;
+  }
+  h1 {
+    font-size: 3em;
+    margin-top: 5%;
+  }
+  #letter {
+    display: none;
+    margin: 30px auto;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 1.2em;
+  }
+  #playBtn {
+    margin-top: 20px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+  }
+  #playBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    transition: all 0.3s;
+  }
+
+  /* 星星样式 */
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: floatStars linear infinite, twinkle 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatStars {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+</style>
 </head>
 <body>
-  <h1>🎂 生日快乐！ 🎉</h1>
-  <p>点击下面按钮播放音乐并查看祝福 💌🎶</p>
 
-  <!-- 播放按钮 -->
-  <button id="playBtn">🔊 播放音乐</button>
+<h1>🎂 生日快乐！ 🎉</h1>
+<p>点击下面按钮播放音乐并查看信封💌🎶</p>
 
-  <!-- APlayer 播放器 -->
-  <div id="aplayer"></div>
+<!-- 播放按钮 -->
+<button id="playBtn">🔊 播放音乐</button>
 
-  <!-- 信件 -->
-  <div id="letter">
-    <h2>给你的一封信 💖</h2>
-    <p>
-      亲爱的朋友，生日快乐！<br>
-      愿你每天都像今天一样充满喜悦，<br>
-      未来的日子里健康、幸福、顺心。<br>
-      这首歌和这封小小的信，是我送给你的特别礼物 🎁
-    </p>
-  </div>
+<!-- APlayer 播放器 -->
+<div id="aplayer"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-  <script>
-    const playBtn = document.getElementById('playBtn');
-    const letter = document.getElementById('letter');
+<!-- 信件 -->
+<div id="letter">
+  <h2>给你的一封信礼物 💖</h2>
+  <p>
+    赛赛，生日快乐！🎉🎂<br>
+    <!-- 省略正文，可保留原文 -->
+  </p>
+</div>
 
-    // 初始化 APlayer
-    const ap = new APlayer({
-      element: document.getElementById('aplayer'),
-      showlrc: false,
-      fixed: true,
-      mini: true,
-      audio: [
-        {
-          name: "Happy Birthday",
-          artist: "From Me",
-          url: "https://res.cloudinary.com/dt3tc3qjw/video/upload/v1759328043/Happy_Birthday_uwtecg.mp3",
-          cover: "https://pic.imgdb.cn/item/66b4d81ed9c307b7e9509a33.jpg"
-        }
-      ]
-    });
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script>
+const playBtn = document.getElementById('playBtn');
+const letter = document.getElementById('letter');
 
-    let isPlaying = false;
+// 初始化音乐播放器
+const ap = new APlayer({
+  element: document.getElementById('aplayer'),
+  showlrc: false,
+  fixed: true,
+  mini: true,
+  audio: [
+    {
+      name: "Happy Birthday",
+      artist: "From Me",
+      url: "https://res.cloudinary.com/dt3tc3qjw/video/upload/v1759328043/Happy_Birthday_uwtecg.mp3",
+      cover: "https://res.cloudinary.com/dt3tc3qjw/image/upload/v1759328695/ogsv4iCeNBzAlEAaTgAJAFXkEfN4sHAiTAIAiA_tplv-dy-aweme-images_q75_copy_lyfldl.jpg"
+    }
+  ]
+});
 
-    playBtn.addEventListener('click', () => {
-      if (!isPlaying) {
-        ap.play();
-        isPlaying = true;
-        playBtn.textContent = "⏸ 暂停音乐";
-        letter.style.display = "block"; // 播放音乐时显示信件
-      } else {
-        ap.pause();
-        isPlaying = false;
-        playBtn.textContent = "🔊 播放音乐";
-      }
-    });
-  </script>
+let isPlaying = false;
+playBtn.addEventListener('click', () => {
+  if(!isPlaying){
+    ap.play();
+    isPlaying = true;
+    playBtn.textContent = "⏸ 暂停音乐";
+    letter.style.display = "block";
+    createStars(50); // 创建50颗小星星
+  } else {
+    ap.pause();
+    isPlaying = false;
+    playBtn.textContent = "🔊 播放音乐";
+  }
+});
+
+// 创建漂浮闪烁的星星
+function createStars(number){
+  for(let i=0;i<number;i++){
+    let star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.width = (2 + Math.random()*3) + 'px';
+    star.style.height = star.style.width;
+    star.style.animationDuration = (5 + Math.random()*10) + 's';
+    document.body.appendChild(star);
+  }
+}
+</script>
 </body>
 </html>
-
-
 
