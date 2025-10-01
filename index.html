@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <title>音乐测试</title>
-</head>
-<body style="text-align:center; margin-top:20%;">
-  <h2>🎵 音乐测试页面 🎵</h2>
-  <button onclick="playMusic()">▶️ 播放音乐</button>
+<audio id="bg-music" autoplay loop muted>
+  <source src="https://raw.githubusercontent.com/zq77le/HB/main/HappyBirthday.mp3" type="audio/mpeg">
+</audio>
 
-  <audio id="bg-music" src="https://raw.githubusercontent.com/zq77le/HB/main/HappyBirthday.mp3"></audio>
+<button onclick="unmuteMusic()">🔊 开启音乐</button>
 
-  <script>
-    function playMusic() {
-      const music = document.getElementById("bg-music");
-      music.play().then(() => {
-        alert("✅ 音乐开始播放！");
-      }).catch(err => {
-        alert("❌ 播放失败: " + err);
-      });
-    }
-  </script>
-</body>
-</html>
+<script>
+  function unmuteMusic() {
+    const music = document.getElementById("bg-music");
+    music.muted = false; // 取消静音
+    music.play();
+    alert("✅ 声音已开启！");
+  }
+</script>
 
 
 
