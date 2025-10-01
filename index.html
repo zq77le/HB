@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>赛赛生日快乐🎉</title>
+<title>赛赛生日快乐！🎉</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <style>
   html, body {
@@ -158,9 +158,10 @@
 <div class="cake" id="cake">
   <div class="cake-base"></div>
   <div class="cake-top"></div>
-  <div class="candle" style="left:35px;"><div class="flame"></div></div>
-  <div class="candle" style="left:60px;"><div class="flame"></div></div>
-  <div class="candle" style="left:85px;"><div class="flame"></div></div>
+  <div class="candle" style="left:20px;"><div class="flame"></div></div>
+  <div class="candle" style="left:45px;"><div class="flame"></div></div>
+  <div class="candle" style="left:70px;"><div class="flame"></div></div>
+  <div class="candle" style="left:95px;"><div class="flame"></div></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
@@ -170,11 +171,9 @@ const letter = document.getElementById('letter');
 const cake = document.getElementById('cake');
 
 const message = `赛赛，生日快乐！🎉🎂
-我们是在《光遇》里认识的，然后开始我们越来越了解对方，从那一刻起，你就成了我生命里特别的存在。
-你总是为别人着想，善良、温柔，会唱歌、画画，写字 还亲手做手链、项链送给我，每一次都让我感动又开心。 对我来说，你就像在远方的家人一样重要，就像妹妹一样亲近。  
+我们是在《光遇》里认识的，然后开始我们越来越了解对方，从那一刻起，你就成了我生命里特别的存在。你总是为别人着想，善良、温柔，会唱歌、画画，写字 还亲手做手链、项链送给我，每一次都让我感动又开心。 对我来说，你就像在远方的家人一样重要，就像妹妹一样亲近。  
 
-每次和你打电话、聊天、打游戏、唱歌 我都觉得很安心、很开心，好像所有烦恼都离我远去了。 
-我知道你有时候也会心情不好，有烦恼却不想立刻说出来，但我想让你知道无论你开心还是不开心，我都会在你身边陪你，不只是今天，而是每一天。只要你需要，我就一直在。你永远是我最好的好朋友、第一名💛  
+每次和你打电话、聊天、打游戏、唱歌 我都觉得很安心、很开心，好像所有烦恼都离我远去了。 我知道你有时候也会心情不好，有烦恼却不想立刻说出来，但我想让你知道无论你开心还是不开心，我都会在你身边陪你，不只是今天，而是每一天。只要你需要，我就一直在。你永远是我最好的好朋友、第一名💛  
 
 今年的生日礼物你老是说贵！这就是一年一次你的生日我还是希望你收到礼物后会喜欢。当然如果不满意，我们还可以再买别的哈哈哈哈  
 
@@ -194,7 +193,7 @@ const ap = new APlayer({
   audio: [
     {
       name: "Happy Birthday",
-      artist: "8bite",
+      artist: "From Me",
       url: "https://res.cloudinary.com/dt3tc3qjw/video/upload/v1759328043/Happy_Birthday_uwtecg.mp3",
       cover: "https://res.cloudinary.com/dt3tc3qjw/image/upload/v1759328695/ogsv4iCeNBzAlEAaTgAJAFXkEfN4sHAiTAIAiA_tplv-dy-aweme-images_q75_copy_lyfldl.jpg"
     }
@@ -203,7 +202,6 @@ const ap = new APlayer({
 
 let isPlaying = false;
 
-// 播放按钮逻辑
 playBtn.addEventListener('click', () => {
   if(!isPlaying){
     ap.play();
@@ -226,7 +224,6 @@ function typeWriter(element, text, index){
     element.innerHTML += text.charAt(index);
     setTimeout(()=> typeWriter(element, text, index+1), 20);
   } else {
-    // 文字显示完成后，显示蛋糕并启动火花
     cake.style.display = "block";
     startCakeSparks();
   }
@@ -277,30 +274,4 @@ function startShootingStars(){
   }, 1500);
 }
 
-// 彩色小火花动画
-function startCakeSparks(){
-  setInterval(() => {
-    let spark = document.createElement('div');
-    spark.classList.add('spark');
-    spark.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
-    spark.style.left = (cake.offsetLeft + 70 + Math.random()*20 - 10) + 'px';
-    spark.style.top = (cake.offsetTop - 10) + 'px';
-    document.body.appendChild(spark);
-
-    let dx = (Math.random()*40 - 20);
-    let dy = -(20 + Math.random()*30);
-
-    spark.animate(
-      [
-        { transform: `translate(0,0)`, opacity:1 },
-        { transform: `translate(${dx}px,${dy}px)`, opacity:0 }
-      ],
-      { duration: 1000 + Math.random()*500, easing: 'ease-out' }
-    ).onfinish = () => spark.remove();
-  }, 200);
-}
-</script>
-</body>
-</html>
-
-
+// 彩色小
