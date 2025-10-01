@@ -104,7 +104,8 @@
     border-radius: 10px 10px 0 0;
     position: absolute;
     top: -40px;
-    left: 25px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
   }
 
@@ -158,10 +159,11 @@
 <div class="cake" id="cake">
   <div class="cake-base"></div>
   <div class="cake-top"></div>
-  <div class="candle" style="left:20px;"><div class="flame"></div></div>
-  <div class="candle" style="left:45px;"><div class="flame"></div></div>
-  <div class="candle" style="left:70px;"><div class="flame"></div></div>
-  <div class="candle" style="left:95px;"><div class="flame"></div></div>
+  <!-- 4 根蜡烛整齐居中 -->
+  <div class="candle" style="left:20%;"><div class="flame"></div></div>
+  <div class="candle" style="left:40%;"><div class="flame"></div></div>
+  <div class="candle" style="left:60%;"><div class="flame"></div></div>
+  <div class="candle" style="left:80%;"><div class="flame"></div></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
@@ -274,7 +276,7 @@ function startShootingStars(){
   }, 1500);
 }
 
-// 彩色小火花动画
+// 蛋糕火花
 function startCakeSparks(){
   setInterval(() => {
     let spark = document.createElement('div');
