@@ -6,52 +6,54 @@
 <title>赛赛生日快乐！🎉</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
 <style>
-  body {
+  html, body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    background: linear-gradient(to right, #0d0d3f, #4b0082); /* 深蓝紫色渐变 */
-    overflow: hidden;
+    background: linear-gradient(to bottom, #0d0d3f, #4b0082);
     color: white;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
   }
 
   h1 {
     font-size: 3em;
-    margin-top: 5%;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #playBtn {
+    display: block;
+    margin: 20px auto;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    cursor: pointer;
+  }
+
+  #playBtn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+    transition: all 0.3s;
   }
 
   #letter {
-    margin: 30px auto;
+    margin: 20px auto;
     max-width: 700px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.1);
     padding: 25px;
     border-radius: 15px;
     font-size: 1.2em;
     text-align: left;
     white-space: pre-line;
     display: none;
-    overflow: hidden;
   }
 
-  #playBtn {
-    margin-top: 20px;
-    font-size: 1.2em;
-    padding: 10px 20px;
-    border-radius: 12px;
-    border: 2px solid white;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    cursor: pointer;
-  }
-
-  #playBtn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-    transition: all 0.3s;
-  }
-
-  /* 星点背景 */
+  /* 流动闪烁星星 */
   .star {
     position: absolute;
     width: 2px;
@@ -59,24 +61,35 @@
     background-color: white;
     border-radius: 50%;
     opacity: 0.8;
-    animation: twinkle 3s infinite alternate;
+    animation: twinkle 2s infinite alternate;
+  }
+
+  /* 流星 */
+  .shooting-star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: linear-gradient(45deg, #ff0, #f0f, #0ff);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff;
   }
 
   @keyframes twinkle {
-    0% {opacity: 0.2;}
-    50% {opacity: 1;}
-    100% {opacity: 0.2;}
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
   }
+
 </style>
 </head>
 <body>
 
 <h1>🎂 生日快乐！ 🎉</h1>
-<p>点击下面按钮播放音乐并查看祝福信💌🎶</p>
+<p style="text-align:center;">点击下面按钮播放音乐并查看祝福信💌🎶</p>
 
 <button id="playBtn">🔊 播放音乐</button>
-<div id="aplayer"></div>
 
+<div id="aplayer"></div>
 <div id="letter"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
@@ -99,7 +112,6 @@ const message = `赛赛，生日快乐！🎉🎂
 
 —— 你的好朋友`;
 
-// 初始化 APlayer
 const ap = new APlayer({
   element: document.getElementById('aplayer'),
   showlrc: false,
@@ -108,7 +120,7 @@ const ap = new APlayer({
   audio: [
     {
       name: "Happy Birthday",
-      artist: "From Me",
+      artist: "8bite",
       url: "https://res.cloudinary.com/dt3tc3qjw/video/upload/v1759328043/Happy_Birthday_uwtecg.mp3",
       cover: "https://res.cloudinary.com/dt3tc3qjw/image/upload/v1759328695/ogsv4iCeNBzAlEAaTgAJAFXkEfN4sHAiTAIAiA_tplv-dy-aweme-images_q75_copy_lyfldl.jpg"
     }
@@ -124,7 +136,8 @@ playBtn.addEventListener('click', () => {
     playBtn.textContent = "⏸ 暂停音乐";
     letter.style.display = "block";
     typeWriter(letter, message, 0);
-    createStars(100);
+    startStarsFlow();
+    startShootingStars();
   } else {
     ap.pause();
     isPlaying = false;
@@ -132,27 +145,59 @@ playBtn.addEventListener('click', () => {
   }
 });
 
-// 逐字显示文字函数
+// 文字逐字显示
 function typeWriter(element, text, index){
   if(index < text.length){
     element.innerHTML += text.charAt(index);
-    setTimeout(()=> typeWriter(element, text, index+1), 20); // 每20ms显示一个字
+    setTimeout(()=> typeWriter(element, text, index+1), 20);
   }
 }
 
-// 创建星星函数
-function createStars(number){
-  for(let i=0;i<number;i++){
+// 流动星星
+function startStarsFlow(){
+  setInterval(() => {
     let star = document.createElement('div');
     star.classList.add('star');
     star.style.left = Math.random() * window.innerWidth + 'px';
-    star.style.top = Math.random() * window.innerHeight + 'px';
-    star.style.width = (1 + Math.random()*2) + 'px';
-    star.style.height = star.style.width;
-    star.style.animationDuration = (1 + Math.random()*3) + 's';
+    star.style.top = window.innerHeight + 'px';
+    let size = 1 + Math.random()*2;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    let duration = 5 + Math.random()*5;
     document.body.appendChild(star);
-  }
+    star.animate(
+      [
+        { transform: `translateY(0)` },
+        { transform: `translateY(-${window.innerHeight + 50}px)` }
+      ],
+      { duration: duration*1000, easing: 'linear' }
+    ).onfinish = () => star.remove();
+  }, 200);
 }
+
+// 流星效果
+function startShootingStars(){
+  setInterval(() => {
+    let star = document.createElement('div');
+    star.classList.add('shooting-star');
+    let startX = Math.random() * window.innerWidth;
+    let startY = Math.random() * window.innerHeight / 2;
+    star.style.left = startX + 'px';
+    star.style.top = startY + 'px';
+    let endX = startX + (50 + Math.random()*150);
+    let endY = startY + (50 + Math.random()*150);
+    document.body.appendChild(star);
+
+    star.animate(
+      [
+        { transform: `translate(0,0)`, opacity:1 },
+        { transform: `translate(${endX-startX}px,${endY-startY}px)`, opacity:0 }
+      ],
+      { duration: 1000 + Math.random()*1000, easing: 'ease-out' }
+    ).onfinish = () => star.remove();
+  }, 1500); // 每1.5秒出现一颗流星
+}
+
 </script>
 
 </body>
