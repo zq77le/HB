@@ -80,6 +80,63 @@
     100% { opacity: 0.2; }
   }
 
+  /* 生日蛋糕 */
+  .cake {
+    position: relative;
+    width: 150px;
+    margin: 30px auto;
+  }
+
+  .cake-base {
+    width: 100%;
+    height: 60px;
+    background: #ff9999;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cake-top {
+    width: 100px;
+    height: 40px;
+    background: #ff6666;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: -40px;
+    left: 25px;
+    z-index: 2;
+  }
+
+  .candle {
+    width: 8px;
+    height: 20px;
+    background: #fff;
+    position: absolute;
+    top: -60px;
+    border-radius: 2px;
+  }
+
+  .candle:nth-child(1) { left: 40px; }
+  .candle:nth-child(2) { left: 65px; }
+  .candle:nth-child(3) { left: 90px; }
+
+  .flame {
+    width: 6px;
+    height: 10px;
+    background: radial-gradient(circle, #ff0 0%, #f90 70%, #f00 100%);
+    position: absolute;
+    top: -10px;
+    left: 1px;
+    border-radius: 50%;
+    animation: flicker 0.5s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0% { transform: scale(1); opacity:1; }
+    50% { transform: scale(1.3); opacity:0.8; }
+    100% { transform: scale(1); opacity:1; }
+  }
+
 </style>
 </head>
 <body>
@@ -92,10 +149,20 @@
 <div id="aplayer"></div>
 <div id="letter"></div>
 
+<!-- 生日蛋糕 -->
+<div class="cake" id="cake" style="display:none;">
+  <div class="cake-base"></div>
+  <div class="cake-top"></div>
+  <div class="candle"><div class="flame"></div></div>
+  <div class="candle"><div class="flame"></div></div>
+  <div class="candle"><div class="flame"></div></div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script>
 const playBtn = document.getElementById('playBtn');
 const letter = document.getElementById('letter');
+const cake = document.getElementById('cake');
 
 const message = `赛赛，生日快乐！🎉🎂
 我们是在《光遇》里认识的，然后开始我们越来越了解对方，从那一刻起，你就成了我生命里特别的存在。你总是为别人着想，善良、温柔，会唱歌、画画，写字 还亲手做手链、项链送给我，每一次都让我感动又开心。 对我来说，你就像在远方的家人一样重要，就像妹妹一样亲近。  
@@ -120,7 +187,7 @@ const ap = new APlayer({
   audio: [
     {
       name: "Happy Birthday",
-      artist: "8bite",
+      artist: "From Me",
       url: "https://res.cloudinary.com/dt3tc3qjw/video/upload/v1759328043/Happy_Birthday_uwtecg.mp3",
       cover: "https://res.cloudinary.com/dt3tc3qjw/image/upload/v1759328695/ogsv4iCeNBzAlEAaTgAJAFXkEfN4sHAiTAIAiA_tplv-dy-aweme-images_q75_copy_lyfldl.jpg"
     }
@@ -135,6 +202,7 @@ playBtn.addEventListener('click', () => {
     isPlaying = true;
     playBtn.textContent = "⏸ 暂停音乐";
     letter.style.display = "block";
+    cake.style.display = "block";
     typeWriter(letter, message, 0);
     startStarsFlow();
     startShootingStars();
@@ -195,9 +263,8 @@ function startShootingStars(){
       ],
       { duration: 1000 + Math.random()*1000, easing: 'ease-out' }
     ).onfinish = () => star.remove();
-  }, 1500); // 每1.5秒出现一颗流星
+  }, 1500);
 }
-
 </script>
 
 </body>
