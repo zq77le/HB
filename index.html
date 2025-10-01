@@ -2,104 +2,27 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>生日快乐！</title>
-  <style>
-    body {
-      text-align: center;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-    h1 {
-      font-size: 3em;
-      margin-top: 15%;
-      animation: fadeIn 2s ease-in-out;
-    }
-    button {
-      margin-top: 30px;
-      font-size: 1.2em;
-      cursor: pointer;
-      padding: 12px 25px;
-      border: 2px solid white;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      transition: transform 0.3s, background 0.3s;
-    }
-    button:hover {
-      transform: scale(1.1);
-      background: rgba(255, 255, 255, 0.4);
-    }
-    #letter {
-      display: none;
-      margin: 30px auto;
-      max-width: 500px;
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 15px;
-      line-height: 1.8em;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  <title>音乐测试</title>
 </head>
-<body>
-  <h1>🎂 生日快乐！ 🎂</h1>
+<body style="text-align:center; margin-top:20%;">
+  <h2>🎵 音乐测试页面 🎵</h2>
+  <button onclick="playMusic()">▶️ 播放音乐</button>
 
-  <!-- 播放音乐按钮 -->
-  <button id="musicBtn" onclick="toggleMusic()">▶️ 播放音乐</button>
-  <!-- 打开信件按钮（初始隐藏） -->
-  <button id="letterBtn" onclick="openLetter()" style="display:none;">📩 打开信件</button>
-
-  <!-- 信件内容 -->
-  <div id="letter">
-    <h2>💌 给你的话</h2>
-    <p>
-      亲爱的朋友：<br><br>
-      在你特别的日子里，愿你被温柔以待，收获所有的快乐与幸福。<br>
-      感谢一路上的陪伴，新的一岁愿你笑容更多，心愿成真。<br><br>
-      🎉 生日快乐！
-    </p>
-  </div>
-
-  <!-- 背景音乐 -->
-  <audio id="bg-music" loop>
-    <source src="https://raw.githubusercontent.com/zq77le/HB/refs/heads/main/Happy%20Birthday.mp3" type="audio/mpeg">
+  <audio id="bg-music">
+    <source src="https://raw.githubusercontent.com/zq77le/HB/main/HappyBirthday.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    let isPlaying = false;
-    function toggleMusic() {
+    function playMusic() {
       const music = document.getElementById("bg-music");
-      const btn = document.getElementById("musicBtn");
-      if (!isPlaying) {
-        music.play().then(() => {
-          isPlaying = true;
-          btn.textContent = "⏸ 暂停音乐";
-          document.getElementById("letterBtn").style.display = "inline-block";
-        }).catch(err => {
-          alert("音乐播放失败，请再点一次 🎵");
-        });
-      } else {
-        music.pause();
-        isPlaying = false;
-        btn.textContent = "▶️ 播放音乐";
-      }
-    }
-
-    function openLetter() {
-      document.getElementById("letter").style.display = "block";
-      document.getElementById("letterBtn").style.display = "none";
+      music.play().then(() => {
+        alert("音乐正在播放 🎶");
+      }).catch(err => {
+        alert("音乐播放失败: " + err);
+      });
     }
   </script>
 </body>
 </html>
+
 
